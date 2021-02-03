@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textArea{
+            width: 600px;
+            background-color: #F6F6F6;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin: 100px auto;
+            padding: 30px;
+            padding-top: 60px;
+            position: relative;
+        }
+        .copyBtns{
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #E5EFFF;
+            padding: 5px 15px;
+            font-size: 16px;
+            color: #0066ff;
+            cursor: pointer;
+            border-radius: 5px;
+            user-select: none;
+        }
+        .copyBtns:hover{
+            background-color: rgba(0,102,255,.15);
+        }
+        .copyBtns:active{
+            background-color: #0066ff;
+            color: #fff;
+        }
+        .warning{
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,102,255,.15);
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            color: #0066ff;
+            font-size: 14px;
+            animation: showToHide 2s forwards;
+        }
+        @keyframes showToHide {
+            0%{
+                top: 0;
+                opacity: 0;
+            }
+            10%{
+                top: 30px;
+                opacity: 1;
+            }
+            90%{
+                top: 30px;
+                opacity: 1;
+            }
+            100%{
+                top: 0px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="textArea">
+        <div class="copyBtns">复制</div>
+        <div class="textAreaBox" id="textAreaBox">
+            ss
+        </div>
+    </div>
+</body>
+<script src="./a.js"></script>
+<script>
+    document.querySelector('.textAreaBox').innerHTML = res.replace(/[\r\n\s]/g,"")
+    var copyBtn = document.querySelector('.copyBtns');
+    copyBtn.onclick = function () {
+        var a = document.getElementById("textAreaBox");
+        var s = window.getSelection();
+        var r = document.createRange();
+        r.selectNodeContents(a);
+        s.removeAllRanges();
+        s.addRange(r);
+        document.execCommand("Copy");
+        var ss = document.createElement('div');
+        ss.setAttribute('class','warning');
+        ss.innerHTML = '复制成功！'
+        document.body.appendChild(ss)
+    }
+
+
+    
+
+
+</script>
+</html>
